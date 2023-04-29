@@ -33,6 +33,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
     private lateinit var vibrator: Vibrator
+    private var statusbar_toggle: Boolean = false
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -299,10 +300,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun swipeDownAction() {
-        when (prefs.swipeDownAction) {
-            Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
-            else -> expandNotificationDrawer(requireContext())
+    private fun swipeDownAction() = when (prefs.swipeDownAction) {
+        Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
+        else -> {
+            if (statusbar_toggle) {
+                statusbar_toggle = false;
+                showStatusBar()
+            } else {
+                statusbar_toggle = true;
+                hideStatusBar()
+            }
         }
     }
 
