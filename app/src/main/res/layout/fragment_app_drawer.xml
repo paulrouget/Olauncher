@@ -26,7 +26,6 @@
             app:closeIcon="@null"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            app:queryHint="___"
             app:searchIcon="@null"
             app:theme="@style/AppSearchText" />
 
@@ -65,11 +64,14 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="end"
         android:layout_marginTop="180dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:fadingEdgeLength="24dp"
         android:requiresFadingEdge="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="false"
+        app:stackFromEnd="false" />
 
 </FrameLayout>
