@@ -110,8 +110,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupOrientation() {
         if (isTablet(this)) return
         // In Android 8.0, windowIsTranslucent cannot be used with screenOrientation=portrait
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O)
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        // if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O)
+        //     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     private fun backToHomeScreen() {
