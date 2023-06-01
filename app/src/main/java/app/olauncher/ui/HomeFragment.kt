@@ -337,6 +337,18 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         else openCameraApp(requireContext())
     }
 
+    private fun openSwipeDownApp() {
+        if (!prefs.swipeDownEnabled) return
+        if (prefs.appPackageSwipeDown.isNotEmpty())
+            launchApp(
+                prefs.appNameSwipeDown,
+                prefs.appPackageSwipeDown,
+                prefs.appActivityClassNameSwipeDown,
+                android.os.Process.myUserHandle().toString()
+            )
+        else openCameraApp(requireContext())
+    }
+
     private fun lockPhone() {
         requireActivity().runOnUiThread {
             try {
@@ -408,7 +420,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                swipeDownAction()
+                openSwipeDownApp()
+                // swipeDownAction()
             }
 
             override fun onLongClick() {
@@ -450,7 +463,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                swipeDownAction()
+                openSwipeDownApp()
+                // swipeDownAction()
             }
 
             override fun onLongClick(view: View) {

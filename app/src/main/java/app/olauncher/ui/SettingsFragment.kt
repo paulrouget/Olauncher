@@ -125,6 +125,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
+            R.id.swipeDownApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_DOWN_APP)
             R.id.swipeDownAction -> binding.swipeDownSelectLayout.visibility = View.VISIBLE
             R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
             R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
@@ -159,6 +160,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             }
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
+            R.id.swipeDownApp -> toggleSwipeDown()
             R.id.toggleLock -> startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
         return true
@@ -186,6 +188,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dateOnly.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
+        binding.swipeDownApp.setOnClickListener(this)
         binding.swipeDownAction.setOnClickListener(this)
         binding.search.setOnClickListener(this)
         binding.notifications.setOnClickListener(this)
@@ -230,6 +233,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appThemeText.setOnLongClickListener(this)
         binding.swipeLeftApp.setOnLongClickListener(this)
         binding.swipeRightApp.setOnLongClickListener(this)
+        binding.swipeDownApp.setOnLongClickListener(this)
         binding.toggleLock.setOnLongClickListener(this)
     }
 
@@ -270,6 +274,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         } else {
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             requireContext().showToast("Swipe right app disabled")
+        }
+    }
+
+    private fun toggleSwipeDown() {
+        prefs.swipeDownEnabled = !prefs.swipeDownEnabled
+        if (prefs.swipeDownEnabled) {
+            binding.swipeDownApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
+            requireContext().showToast("Swipe down app enabled")
+        } else {
+            binding.swipeDownApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            requireContext().showToast("Swipe down app disabled")
         }
     }
 
@@ -574,10 +589,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateSwipeApps() {
         binding.swipeLeftApp.text = prefs.appNameSwipeLeft
         binding.swipeRightApp.text = prefs.appNameSwipeRight
+        binding.swipeDownApp.text = prefs.appNameSwipeDown
         if (!prefs.swipeLeftEnabled)
             binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
         if (!prefs.swipeRightEnabled)
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+        if (!prefs.swipeDownEnabled)
+            binding.swipeDownApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
     }
 
     private fun showAppListIfEnabled(flag: Int) {
@@ -586,6 +604,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             return
         }
         if ((flag == Constants.FLAG_SET_SWIPE_RIGHT_APP) and !prefs.swipeRightEnabled) {
+            requireContext().showToast("Long press to enable")
+            return
+        }
+        if ((flag == Constants.FLAG_SET_SWIPE_DOWN_APP) and !prefs.swipeDownEnabled) {
             requireContext().showToast("Long press to enable")
             return
         }

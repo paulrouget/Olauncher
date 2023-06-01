@@ -109,6 +109,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appActivityClassNameRight = appModel.activityClassName
                 updateSwipeApps()
             }
+            Constants.FLAG_SET_SWIPE_DOWN_APP -> {
+                prefs.appNameSwipeDown = appModel.appLabel
+                prefs.appPackageSwipeDown = appModel.appPackage
+                prefs.appUserSwipeDown = appModel.user.toString()
+                prefs.appActivityClassNameSwipeDown = appModel.activityClassName
+                updateSwipeApps()
+            }
         }
     }
 

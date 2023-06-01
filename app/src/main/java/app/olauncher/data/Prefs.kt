@@ -25,6 +25,7 @@ class Prefs(context: Context) {
     private val DATE_TIME_VISIBILITY = "DATE_TIME_VISIBILITY"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
+    private val SWIPE_DOWN_ENABLED = "SWIPE_DOWN_ENABLED"
     private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
     private val HIDDEN_APPS = "HIDDEN_APPS"
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
@@ -71,12 +72,16 @@ class Prefs(context: Context) {
 
     private val APP_NAME_SWIPE_LEFT = "APP_NAME_SWIPE_LEFT"
     private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
+    private val APP_NAME_SWIPE_DOWN = "APP_NAME_SWIPE_DOWN"
     private val APP_PACKAGE_SWIPE_LEFT = "APP_PACKAGE_SWIPE_LEFT"
     private val APP_PACKAGE_SWIPE_RIGHT = "APP_PACKAGE_SWIPE_RIGHT"
+    private val APP_PACKAGE_SWIPE_DOWN = "APP_PACKAGE_SWIPE_DOWN"
     private val APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT = "APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT"
     private val APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT = "APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT"
+    private val APP_ACTIVITY_CLASS_NAME_SWIPE_DOWN = "APP_ACTIVITY_CLASS_NAME_SWIPE_DOWN"
     private val APP_USER_SWIPE_LEFT = "APP_USER_SWIPE_LEFT"
     private val APP_USER_SWIPE_RIGHT = "APP_USER_SWIPE_RIGHT"
+    private val APP_USER_SWIPE_DOWN = "APP_USER_SWIPE_DOWN"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
@@ -143,6 +148,10 @@ class Prefs(context: Context) {
     var swipeRightEnabled: Boolean
         get() = prefs.getBoolean(SWIPE_RIGHT_ENABLED, true)
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
+
+    var swipeDownEnabled: Boolean
+        get() = prefs.getBoolean(SWIPE_DOWN_ENABLED, true)
+        set(value) = prefs.edit().putBoolean(SWIPE_DOWN_ENABLED, value).apply()
 
     var appTheme: Int
         get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
@@ -320,13 +329,25 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "Phone").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_RIGHT, value).apply()
 
+    var appNameSwipeDown: String
+        get() = prefs.getString(APP_NAME_SWIPE_DOWN, "Camera").toString()
+        set(value) = prefs.edit().putString(APP_NAME_SWIPE_DOWN, value).apply()
+
     var appPackageSwipeLeft: String
         get() = prefs.getString(APP_PACKAGE_SWIPE_LEFT, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_LEFT, value).apply()
 
+    var appPackageSwipeDown: String
+        get() = prefs.getString(APP_PACKAGE_SWIPE_DOWN, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_DOWN, value).apply()
+
     var appActivityClassNameSwipeLeft: String?
         get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT, "").toString()
         set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT, value).apply()
+
+    var appActivityClassNameSwipeDown: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_SWIPE_DOWN, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_SWIPE_DOWN, value).apply()
 
     var appPackageSwipeRight: String
         get() = prefs.getString(APP_PACKAGE_SWIPE_RIGHT, "").toString()
@@ -343,6 +364,10 @@ class Prefs(context: Context) {
     var appUserSwipeRight: String
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
+
+    var appUserSwipeDown: String
+        get() = prefs.getString(APP_USER_SWIPE_DOWN, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_SWIPE_DOWN, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {
